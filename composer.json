@@ -1,5 +1,5 @@
 {
-    "name": "jjpmann/cms-helper",
+    "name": "lmoengineering/cms-helper",
     "description": "Load Env and Bugsnag and other settings",
     "type": "library",
     "license": "MIT",
