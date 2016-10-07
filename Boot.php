@@ -2,9 +2,10 @@
 
 namespace CMS;
 
-use Dotenv\Dotenv;
-use Bugsnag\Client;
-use Bugsnag\Handler;
+use \App\Version;
+use \Bugsnag\Client;
+use \Bugsnag\Handler;
+use \Dotenv\Dotenv;
 
 class Boot
 {
