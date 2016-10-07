@@ -1,2 +1,3 @@
-# cms-helper
-Load Env and Bugsnag and other settings
+# CMS Helper
+Loads ENV settings and Bugsnag
+
