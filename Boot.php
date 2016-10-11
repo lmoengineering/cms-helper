@@ -43,6 +43,32 @@ class Boot
         return $bugsnag;
     }
 
+    public static function bugsnagJsData($options)
+    {
+        // if (env('APP_ENV') == 'local') {
+        //     return;
+        // }
+        
+        foreach ($options as $key => $value) {
+            if (isset(self::$bugsnagOptions[$key])) {
+                self::$bugsnagOptions[$key] = $value;
+            }
+        }
+        
+        $bugsnagParams = [
+            'data-apikey'               => self::$bugsnagOptions['key'],
+            'data-appversion'           => Version::current(),
+            'data-releasestage'         => self::$bugsnagOptions['stage'],
+        ];
+
+        $bugsnagParams = self::$bugsnagOptions;
+        $paramsJoined = '';
+        foreach($bugsnagParams as $param => $value) {
+           $paramsJoined .= " $param=\"$value\"";
+        }
+        return $paramsJoined;
+    }
+
     protected static function setTime()
     {
         if( ! ini_get('date.timezone') )
