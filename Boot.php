@@ -12,7 +12,8 @@ class Boot
 
     protected static $bugsnagOptions = [
         'alwaysReport' => false,
-        'key'   => 'xxx', 
+        'key'   => 'xxx',
+        'keyJs'   => 'xxx',
         'stage' => 'Local',
         'type'  => 'PHP',
         'releaseStages' => ['Production', 'Staging', 'Development'], 
@@ -58,7 +59,7 @@ class Boot
         }
         
         $bugsnagParams = [
-            'data-apikey'               => self::$bugsnagOptions['key'],
+            'data-apikey'               => self::$bugsnagOptions['keyJs'],
             'data-appversion'           => Version::current(),
             'data-releasestage'         => self::$bugsnagOptions['stage'],
         ];
