@@ -11,6 +11,7 @@ class Boot
 {
 
     protected static $bugsnagOptions = [
+        'alwaysReport' => false,
         'key'   => 'xxx', 
         'stage' => 'Local',
         'type'  => 'PHP',
@@ -43,16 +44,17 @@ class Boot
         return $bugsnag;
     }
 
-    public static function bugsnagJsData($options)
+    public static function bugsnagJsData($options = [])
     {
-        // if (env('APP_ENV') == 'local') {
-        //     return;
-        // }
-        
+
         foreach ($options as $key => $value) {
             if (isset(self::$bugsnagOptions[$key])) {
                 self::$bugsnagOptions[$key] = $value;
             }
+        }
+
+        if (!self::$bugsnagOptions['alwaysReport'] || self::$bugsnagOptions['stage'] == 'local') {
+            return;
         }
         
         $bugsnagParams = [
@@ -61,7 +63,6 @@ class Boot
             'data-releasestage'         => self::$bugsnagOptions['stage'],
         ];
 
-        $bugsnagParams = self::$bugsnagOptions;
         $paramsJoined = '';
         foreach($bugsnagParams as $param => $value) {
            $paramsJoined .= " $param=\"$value\"";
