@@ -54,7 +54,7 @@ class Boot
             }
         }
 
-        if (!self::$bugsnagOptions['alwaysReport'] || self::$bugsnagOptions['stage'] == 'local') {
+        if (self::$bugsnagOptions['alwaysReport'] || self::$bugsnagOptions['stage'] == 'Local') {
             return;
         }
         
