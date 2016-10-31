@@ -34,6 +34,10 @@ class Boot
             }
         }
 
+        if (!self::$bugsnagOptions['key']) {
+            return;
+        }
+
         $bugsnag = Client::make(self::$bugsnagOptions['key']);
         $bugsnag->setNotifyReleaseStages(self::$bugsnagOptions['releaseStages']);
         $bugsnag->setReleaseStage(self::$bugsnagOptions['stage']);
@@ -52,6 +56,10 @@ class Boot
             if (isset(self::$bugsnagOptions[$key])) {
                 self::$bugsnagOptions[$key] = $value;
             }
+        }
+
+        if (!self::$bugsnagOptions['keyJs']) {
+            return;
         }
 
         if (self::$bugsnagOptions['alwaysReport'] || self::$bugsnagOptions['stage'] == 'Local') {

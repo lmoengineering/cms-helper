@@ -18,18 +18,26 @@ if (!function_exists('server')) {
 }
 
 if (!function_exists('getRevision')) {
-    function getRevision() 
+    function getRevision($file = false) 
     {
         static $r = null;
         if ($r) {
             return $r;
         }
+        if (file_exists($file)) {
+           return trim(file_get_contents($file));
+        }
         $revisionFile = APP_ROOT .'/.revision';
         if (file_exists($revisionFile)) {
-            $r = trim(file_get_contents($revisionFile));
-        } else {
-            $r = time();
+            return trim(file_get_contents($revisionFile));
         }
-        return $r;
+        return time();
     }
 }
+
+if (!function_exists('getBuild')) {
+    function getBuild($file = false) {
+        return getRevision($file);
+    }
+}
+
