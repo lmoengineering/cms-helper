@@ -38,6 +38,10 @@ class Boot
             return;
         }
 
+        if (self::$bugsnagOptions['alwaysReport'] || self::$bugsnagOptions['stage'] == 'Local') {
+            return;
+        }
+
         $bugsnag = Client::make(self::$bugsnagOptions['key']);
         $bugsnag->setNotifyReleaseStages(self::$bugsnagOptions['releaseStages']);
         $bugsnag->setReleaseStage(self::$bugsnagOptions['stage']);

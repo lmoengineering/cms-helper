@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/lmoengineering/cms-helper/tree/HEAD)
 
+## [1.0.3](https://github.com/lmoengineering/cms-helper/releases/tag/v1.0.3) - 2016-11-17
+
+* Add alwaysReport conditional to php client section as well
+
 ## [1.0.2](https://github.com/lmoengineering/cms-helper/releases/tag/v1.0.2) - 2016-10-31
 
 ### Added
