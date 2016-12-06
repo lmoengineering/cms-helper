@@ -10,6 +10,8 @@ use \Dotenv\Dotenv;
 class Boot
 {
 
+    protected static $testDotEnvFile = '/.env.test';
+
     protected static $bugsnagOptions = [
         'alwaysReport' => false,
         'key'   => 'xxx',
@@ -92,12 +94,19 @@ class Boot
         }
     }
 
+    public static function testDotEnvFile($file)
+    {
+        if (file_exists($file)) {
+            self::$testDotEnvFile = $file;
+        }
+    }
+
     protected static function loadEnv()
     {
         $dotenv = '/.env';
 
         if ($_SERVER['HTTP_HOST'] == 'localhost:8888') {
-            $dotenv .= '.testing';
+            $dotenv = self::$testDotEnvFile;
         }
 
         if (file_exists(APP_ROOT . $dotenv)) {
