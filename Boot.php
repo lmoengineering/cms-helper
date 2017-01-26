@@ -133,12 +133,18 @@ class Boot
             if (server('REQUEST_URI') == '/misc/version') {
                 die(Version::current());
             }
+            if (server('REQUEST_URI') == '/misc/version?shield') {
+                $ver = str_replace('-', '--', Version::current());
+                $url = 'https://img.shields.io/badge/'.ENV_FULL.'-v'.$ver.'-green.svg';
+                header("Location: {$url}", TRUE, 302);
+                exit;
+            }
             if (server('REQUEST_URI') == '/misc/version?previous') {
-                die(Version::previous());   
+                die(Version::previous());
             }
             if (server('REQUEST_URI') == '/misc/version?json') {
                 header('Content-Type: application/json');
-                die(Version::json());   
+                die(Version::json());
             }
         }
     }
