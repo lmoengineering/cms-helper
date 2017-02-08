@@ -32,13 +32,7 @@ class Boot
     public static function loadShutdownHandler()
     {
         register_shutdown_function(function(){
-            // Get last error
-            $lastError = error_get_last();
-
-            // Don't cache pages with errors
-            @header("Cache-Control: no-cache, must-revalidate");
-            @header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
-            @header("Pragma: no-cache");
+            
         });
     }
 
