@@ -9,6 +9,7 @@ use \Dotenv\Dotenv;
 
 class Boot
 {
+    protected static $bugsnag;
 
     protected static $testDotEnvFile = '/.env.test';
 
@@ -48,7 +49,9 @@ class Boot
             return;
         }
 
-        if (self::$bugsnagOptions['alwaysReport'] || self::$bugsnagOptions['stage'] == 'Local') {
+        if (self::$bugsnagOptions['alwaysReport']) {
+            self::$bugsnagOptions['releaseStages'][] = self::$bugsnagOptions['stage'];
+        } elseif (self::$bugsnagOptions['stage'] == 'Local'){
             return;
         }
 
@@ -60,7 +63,23 @@ class Boot
 
         Handler::register($bugsnag);
 
+        self::$bugsnag = $bugsnag;
+
         return $bugsnag;
+    }
+
+    public static function bugsnagException(Exception $e)
+    {
+        if (self::$bugsnag) {
+            self::$bugsnag->notifyException($e);
+        }
+    }
+
+    public static function bugsnagError($type = 'Error', $message)
+    {
+        if (self::$bugsnag) {
+            self::$bugsnag->notifyError($type, $message);
+        }
     }
 
     public static function bugsnagJsData($options = [])
