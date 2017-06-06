@@ -113,7 +113,7 @@ class Boot
     {
         $dotenv = '/.env';
 
-        if ($_SERVER['HTTP_HOST'] == 'localhost:8888') {
+        if ($_SERVER['HTTP_HOST'] == 'localhost:8888' || strpos($_SERVER['HTTP_HOST'], '.test')) {
             $dotenv = self::$testDotEnvFile;
         }
 
