@@ -30,8 +30,8 @@ if (!function_exists('getRevision')) {
     function getRevision($file = false, $defaultTime = true) {
         $revisionFile = APP_ROOT .'/.revision';
         return getFileData($file) ?:  
-                getFileData($revisionFile) ?:
-                ($defaultTime ? time() : false);
+            getFileData($revisionFile) ?:
+            ($defaultTime ? time() : false);
     }
 }
 
@@ -44,7 +44,9 @@ if (!function_exists('getBuild')) {
 if (!function_exists('getCommit')) {
     function getCommit($file = false) {
         $commitFile = APP_ROOT .'/.commit';
-        return getFileData($file) || getFileData($commitFile) || false;
+        return getFileData($file) ?: 
+            getFileData($commitFile) ?: 
+            false;
 
     }
 }
