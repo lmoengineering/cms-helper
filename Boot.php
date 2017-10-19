@@ -51,7 +51,9 @@ class Boot
 
         if (self::$bugsnagOptions['alwaysReport']) {
             self::$bugsnagOptions['releaseStages'][] = self::$bugsnagOptions['stage'];
-        } elseif (self::$bugsnagOptions['stage'] == 'Local'){
+        }
+        
+        if (!in_array(self::$bugsnagOptions['stage'], self::$bugsnagOptions['releaseStages'])) {
             return;
         }
 
@@ -95,7 +97,11 @@ class Boot
             return;
         }
 
-        if (self::$bugsnagOptions['alwaysReport'] || self::$bugsnagOptions['stage'] == 'Local') {
+        if (self::$bugsnagOptions['alwaysReport']) {
+            self::$bugsnagOptions['releaseStages'][] = self::$bugsnagOptions['stage'];
+        }
+        
+        if (!in_array(self::$bugsnagOptions['stage'], self::$bugsnagOptions['releaseStages'])) {
             return;
         }
         
