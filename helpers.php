@@ -17,21 +17,21 @@ if (!function_exists('server')) {
     }
 }
 
-if (!function_exists('getRevision')) {
-    function getRevision($file = false) 
-    {
-        static $r = null;
-        if ($r) {
-            return $r;
-        }
+if (!function_exists('getFileData')) {
+    function getFileData($file) {
         if (file_exists($file)) {
            return trim(file_get_contents($file));
         }
+        return false;
+    }
+}
+
+if (!function_exists('getRevision')) {
+    function getRevision($file = false, $defaultTime = true) {
         $revisionFile = APP_ROOT .'/.revision';
-        if (file_exists($revisionFile)) {
-            return trim(file_get_contents($revisionFile));
-        }
-        return time();
+        return getFileData($file) ?:  
+                getFileData($revisionFile) ?:
+                ($defaultTime ? time() : false);
     }
 }
 
@@ -41,3 +41,10 @@ if (!function_exists('getBuild')) {
     }
 }
 
+if (!function_exists('getCommit')) {
+    function getCommit($file = false) {
+        $commitFile = APP_ROOT .'/.commit';
+        return getFileData($file) || getFileData($commitFile) || false;
+
+    }
+}
