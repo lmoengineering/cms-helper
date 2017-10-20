@@ -53,9 +53,9 @@ class Boot
             self::$bugsnagOptions['releaseStages'][] = self::$bugsnagOptions['stage'];
         }
         
-        if (!in_array(self::$bugsnagOptions['stage'], self::$bugsnagOptions['releaseStages'])) {
-            return;
-        }
+        // if (!in_array(self::$bugsnagOptions['stage'], self::$bugsnagOptions['releaseStages'])) {
+        //     return;
+        // }
 
         $bugsnag = Client::make(self::$bugsnagOptions['key']);
         $bugsnag->setNotifyReleaseStages(self::$bugsnagOptions['releaseStages']);
