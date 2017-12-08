@@ -24,6 +24,9 @@ class Boot
 
     public static function init()
     {
+        if (php_sapi_name() == 'cli') {
+            $_SERVER['HTTP_HOST'] = false;
+        }
         self::setTime();
         self::loadEnv();
         self::dispatch();
